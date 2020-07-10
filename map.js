@@ -7,12 +7,16 @@ var map = L.map('map',{
     zoom: 8
 
 });
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
 
 
 
-axios.get('http://localhost:4000/ply/all/').then((response)=>{
-    L.GeoJSON(response.data,{}).addTo(map);
+axios.get('http://localhost:4000/pnt/all/').then((response)=>{
+    L.geoJSON(response.data,{
+		style:myStyle
+	}).addTo(map);
    }).catch(e=>{
     console.log(e);
    });
-      
